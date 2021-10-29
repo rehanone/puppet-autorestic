@@ -1,68 +1,57 @@
 {
   "name": "rehan-autorestic",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "author": "Rehan Mahmood",
-  "summary": "",
+  "summary": "Install, manage and configure docker/docker-compose management tool autorestic from Github",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/rehanone/puppet-autorestic.git",
+  "project_page": "https://github.com/rehanone/puppet-autorestic",
+  "issues_url": "https://github.com/rehanone/puppet-autorestic/issues",
   "dependencies": [
-
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 5.0.0 < 9.0.0"
+    },
+    {
+      "name": "puppet-archive",
+      "version_requirement": ">= 6.0.0 < 7.0.0"
+    },
+    {
+      "name": "stm-file_capability",
+      "version_requirement": ">= 3.0.0 < 4.0.0"
+    }
   ],
   "operatingsystem_support": [
     {
-      "operatingsystem": "CentOS",
-      "operatingsystemrelease": [
-        "7"
-      ]
-    },
-    {
-      "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [
-        "7"
-      ]
-    },
-    {
-      "operatingsystem": "RedHat",
-      "operatingsystemrelease": [
-        "8"
-      ]
-    },
-    {
-      "operatingsystem": "Scientific",
-      "operatingsystemrelease": [
-        "7"
-      ]
-    },
-    {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "10"
+        "8",
+        "9",
+        "10",
+        "11"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "18.04"
-      ]
-    },
-    {
-      "operatingsystem": "Fedora",
-      "operatingsystemrelease": [
-        "29"
-      ]
-    },
-    {
-      "operatingsystem": "SLES",
-      "operatingsystemrelease": [
-        "15"
+        "14.04",
+        "16.04",
+        "18.04",
+        "20.04"
       ]
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 6.21.0 < 8.0.0"
+      "version_requirement": ">= 5.5.10 < 8.0.0"
     }
+  ],
+  "tags": [
+    "docker",
+    "docker-compose",
+    "compose",
+    "container management"
   ],
   "pdk-version": "2.2.0",
   "template-url": "pdk-default#2.2.0",

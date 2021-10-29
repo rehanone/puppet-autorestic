@@ -1,11 +1,6 @@
-# Changelog
+## 0.0.1 (October 29, 2021)
 
-All notable changes to this project will be documented in this file.
+**Features:**
 
-## Release 0.1.0
+  - Initial release.
 
-**Features**
-
-**Bugfixes**
-
-**Known Issues**
