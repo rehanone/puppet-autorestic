@@ -53,7 +53,7 @@ class autorestic::install () inherits autorestic {
         mode                     => '0755',
         owner                    => 'root',
         group                    => 'root',
-        soft_link                => '/usr/local//bin/restic',
+        soft_link                => '/usr/local/bin/restic',
       },
       'system-autorestic' => {
         ensure                   => $autorestic::autorestic_ensure,
@@ -66,7 +66,7 @@ class autorestic::install () inherits autorestic {
         mode                     => '0755',
         owner                    => 'root',
         group                    => 'root',
-        soft_link                => '/usr/local//bin/autorestic',
+        soft_link                => '/usr/local/bin/autorestic',
       },
     }
   )
@@ -81,10 +81,10 @@ class autorestic::install () inherits autorestic {
       {
         'account_name'      => $autorestic::account_name,
         'account_home'      => $autorestic::account_home,
-        'install_directory' => $autorestic::autorestic_install_directory,
+        'install_directory' => '/usr/local/bin',
       }
     ),
-  } -> file { '/usr/local//bin/arctl':
+  } -> file { '/usr/local/bin/arctl':
     ensure => $link_ensure,
     target => "${autorestic::autorestic_install_directory}/arctl",
   }
