@@ -7,56 +7,66 @@ class autorestic::install () inherits autorestic {
     default   => $autorestic::autorestic_ensure,
   }
 
-  $restic_binary = "${autorestic::account_home}/bin/restic"
+  $link_ensure = $autorestic::autorestic_ensure ? {
+    'present' => link,
+    default   => $autorestic::autorestic_ensure,
+  }
 
   if $autorestic::account_manage {
     create_resources(autorestic::resource::binary_install,
       {
-        $autorestic::account_name => {
-          ensure            => $autorestic::account_ensure,
-          download_url      => $autorestic::restic_binary_url,
-          checksum          => $autorestic::restic_checksum,
-          checksum_type     => $autorestic::restic_checksum_type,
-          install_directory => "${autorestic::account_home}/bin",
-          file_name         => 'restic',
-          mode              => '0750',
-          owner             => $autorestic::account_name,
-          group             => $autorestic::account_name,
+        'home-restic' => {
+          ensure                   => $autorestic::account_ensure,
+          download_url             => $autorestic::restic_download_url,
+          filename                 => $autorestic::restic_download_filename,
+          checksum                 => $autorestic::restic_checksum,
+          checksum_type            => $autorestic::restic_checksum_type,
+          install_directory        => "${autorestic::account_home}/bin",
+          create_install_directory => false,
+          mode                     => '0750',
+          owner                    => $autorestic::account_name,
+          group                    => $autorestic::account_name,
+          soft_link                => "${autorestic::account_home}/bin/restic",
         },
       }
     )
 
     include file_capability
-    file_capability { $restic_binary:
+    file_capability { "${autorestic::account_home}/bin/${autorestic::restic_download_filename}":
       ensure     => present,
       capability => 'cap_dac_read_search+ep',
-      require    => Autorestic::Resource::Binary_install[$autorestic::account_name],
+      require    => Autorestic::Resource::Binary_install['home-restic'],
+      subscribe  => Autorestic::Resource::Binary_install['home-restic'],
     }
   }
 
   create_resources(autorestic::resource::binary_install,
     {
       'system-restic'     => {
-        ensure            => $autorestic::restic_global_install_ensure,
-        download_url      => $autorestic::restic_binary_url,
-        checksum          => $autorestic::restic_checksum,
-        checksum_type     => $autorestic::restic_checksum_type,
-        install_directory => $autorestic::restic_global_install_directory,
-        file_name         => 'restic',
-        mode              => '0755',
-        owner             => 'root',
-        group             => 'root',
+        ensure                   => $autorestic::restic_global_install_ensure,
+        download_url             => $autorestic::restic_download_url,
+        filename                 => $autorestic::restic_download_filename,
+        checksum                 => $autorestic::restic_checksum,
+        checksum_type            => $autorestic::restic_checksum_type,
+        install_directory        => $autorestic::restic_global_install_directory,
+        create_install_directory => true,
+        mode                     => '0755',
+        owner                    => 'root',
+        group                    => 'root',
+        soft_link                => '/usr/local//bin/restic',
       },
       'system-autorestic' => {
-        ensure            => $autorestic::autorestic_ensure,
-        download_url      => $autorestic::autorestic_binary_url,
-        checksum          => $autorestic::autorestic_checksum,
-        checksum_type     => $autorestic::autorestic_checksum_type,
-        install_directory => $autorestic::autorestic_install_directory,
-        file_name         => 'autorestic',
-        mode              => '0755',
-        owner             => 'root',
-        group             => 'root',
+        ensure                   => $autorestic::autorestic_ensure,
+        download_url             => $autorestic::autorestic_download_url,
+        filename                 => $autorestic::autorestic_download_filename,
+        checksum                 => $autorestic::autorestic_checksum,
+        checksum_type            => $autorestic::autorestic_checksum_type,
+        install_directory        => $autorestic::autorestic_install_directory,
+        create_install_directory => true,
+        mode                     => '0755',
+        owner                    => 'root',
+        group                    => 'root',
+        soft_link                => '/usr/local//bin/autorestic',
       },
     }
   )
@@ -70,9 +80,12 @@ class autorestic::install () inherits autorestic {
     content => epp("${module_name}/arctl.epp",
       {
         'account_name'      => $autorestic::account_name,
+        'account_home'      => $autorestic::account_home,
         'install_directory' => $autorestic::autorestic_install_directory,
-        'restic_binaray'    => $restic_binary,
       }
     ),
+  } -> file { '/usr/local//bin/arctl':
+    ensure => $link_ensure,
+    target => "${autorestic::autorestic_install_directory}/arctl",
   }
 }

@@ -2,8 +2,8 @@
 autorestic::account_manage: true
 autorestic::account_ensure: present
 autorestic::account_name: 'autorestic'
-autorestic::account_gid: 990
-autorestic::account_uid: 990
+autorestic::account_gid: '990'
+autorestic::account_uid: '990'
 autorestic::account_home: '/var/lib/autorestic'
 
 autorestic::dependencies_manage: true
@@ -11,17 +11,23 @@ autorestic::dependencies_packages:
   - bzip2
 
 autorestic::architecture: "%{facts.os.architecture}"
+autorestic::os_type: 'linux'
+
 autorestic::restic_ensure: present
 autorestic::restic_version: '0.12.1'
-autorestic::restic_binary_url: "https://github.com/restic/restic/releases/download/v%{lookup('autorestic::restic_version')}/restic_%{lookup('autorestic::restic_version')}_linux_%{lookup('autorestic::architecture')}.bz2"
+autorestic::restic_download_file_extension: "bz2"
+autorestic::restic_download_filename: "restic_%{lookup('autorestic::restic_version')}_%{lookup('autorestic::os_type')}_%{lookup('autorestic::architecture')}"
+autorestic::restic_download_url: "https://github.com/restic/restic/releases/download/v%{lookup('autorestic::restic_version')}/%{lookup('autorestic::restic_download_filename')}.%{lookup('autorestic::restic_download_file_extension')}"
 autorestic::restic_checksum: '11d6ee35ec73058dae73d31d9cd17fe79661090abeb034ec6e13e3c69a4e7088'
 autorestic::restic_checksum_type: sha256
-autorestic::restic_global_install_directory: '/usr/local/bin'
+autorestic::restic_global_install_directory: '/opt/restic'
 autorestic::restic_global_install_ensure: absent
 
 autorestic::autorestic_ensure: present
-autorestic::autorestic_version: '1.3.0'
-autorestic::autorestic_binary_url: "https://github.com/cupcakearmy/autorestic/releases/download/v%{lookup('autorestic::autorestic_version')}/autorestic_%{lookup('autorestic::autorestic_version')}_linux_%{lookup('autorestic::architecture')}.bz2"
-autorestic::autorestic_checksum: '61f0e51b6390a0fcb0ce7aeb38376c58f6261d74f436a16e32b13b0734718bb1'
+autorestic::autorestic_version: '1.4.0'
+autorestic::autorestic_download_file_extension: "bz2"
+autorestic::autorestic_download_filename: "autorestic_%{lookup('autorestic::autorestic_version')}_%{lookup('autorestic::os_type')}_%{lookup('autorestic::architecture')}"
+autorestic::autorestic_download_url: "https://github.com/cupcakearmy/autorestic/releases/download/v%{lookup('autorestic::autorestic_version')}/%{lookup('autorestic::autorestic_download_filename')}.%{lookup('autorestic::autorestic_download_file_extension')}"
+autorestic::autorestic_checksum: 'b92de05eaca58593b80a4b9523fed9ed3cf5a8cdf6d375f05b073ebc3ad15504'
 autorestic::autorestic_checksum_type: sha256
-autorestic::autorestic_install_directory: '/usr/local/bin'
+autorestic::autorestic_install_directory: '/opt/autorestic'

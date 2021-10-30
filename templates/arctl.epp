@@ -1,7 +1,7 @@
 <%- | String               $account_name,
+      Stdlib::Absolutepath $account_home,
       Stdlib::Absolutepath $install_directory,
-      Stdlib::Absolutepath $restic_binaray,
 | -%>
 #!/usr/bin/env bash
 
-sudo -u <%= $account_name %> <%= $install_directory %>/autorestic --restic-bin=<%= $restic_binaray %> "$@"
+sudo -u <%= $account_name %> <%= $install_directory %>/autorestic --restic-bin=<%= $account_home %>/bin/restic --config=<%= $account_home %>/autorestic.yml "$@"
