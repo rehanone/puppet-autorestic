@@ -1,117 +1,57 @@
-# autorestic
+# rehan-autorestic
 
-Welcome to your new module. A short overview of the generated parts can be found
-in the [PDK documentation][1].
+[![Build Status](https://travis-ci.com/rehanone/puppet-autorestic.svg?branch=master)](https://travis-ci.com/rehanone/puppet-autorestic)
 
-The README template below provides a starting point with details about what
-information to include in your README.
+#### Table of Contents
+1. [Overview](#overview)
+2. [Module Description](#module-description)
+3. [Setup](#setup)
+4. [Usage](#usage)
+    * [Classes](#classes)
+    * [Referances](#referances)
+5. [Dependencies](#dependencies)
+6. [Development](#development)
 
-## Table of Contents
+## Overview
+The `rehan-autorestic` installs & manages `autorestic` a tool to control/manage various aspects of docker/docker-compose projects on a single host.
 
-1. [Description](#description)
-1. [Setup - The basics of getting started with autorestic](#setup)
-    * [What autorestic affects](#what-autorestic-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with autorestic](#beginning-with-autorestic)
-1. [Usage - Configuration options and additional functionality](#usage)
-1. [Limitations - OS compatibility, etc.](#limitations)
-1. [Development - Guide for contributing to the module](#development)
+## Module Description
+A puppet module for managing the installation of `autorestic`.
 
-## Description
+More information on `autorestic` tool can be found at:
 
-Briefly tell users why they might want to use your module. Explain what your
-module does and what kind of problems users can solve with it.
-
-This should be a fairly short description helps the user decide if your module
-is what they want.
+  - [https://github.com/rehanone/autorestic](https://github.com/rehanone/autorestic)
 
 ## Setup
+In order to install `rehan-autorestic`, run the following command:
+```bash
+$ puppet module install rehan-autorestic
+```
+The module does expect all the data to be provided through 'Hiera'. See [Usage](#usage) for examples on how to configure it.
 
-### What autorestic affects **OPTIONAL**
-
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
-
-If there's more that they should know about, though, this is the place to
-mention:
-
-* Files, packages, services, or operations that the module will alter, impact,
-  or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section here.
-
-### Beginning with autorestic
-
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most basic
-use of the module.
+#### Requirements
+This module is designed to be as clean and compliant with latest puppet code guidelines.
 
 ## Usage
 
-Include usage examples for common use cases in the **Usage** section. Show your
-users how to use your module to solve problems, and be sure to include code
-examples. Include three to five examples of the most important or common tasks a
-user can accomplish with your module. Show users how to accomplish more complex
-tasks that involve different types, classes, and functions working in tandem.
+### Classes
 
-## Reference
+#### `autorestic`
 
-This section is deprecated. Instead, add reference information to your code as
-Puppet Strings comments, and then use Strings to generate a REFERENCE.md in your
-module. For details on how to add code comments and generate documentation with
-Strings, see the [Puppet Strings documentation][2] and [style guide][3].
-
-If you aren't ready to use Strings yet, manually create a REFERENCE.md in the
-root of your module directory and list out each of your module's classes,
-defined types, facts, functions, Puppet tasks, task plans, and resource types
-and providers, along with the parameters for each.
-
-For each element (class, defined type, function, and so on), list:
-
-* The data type, if applicable.
-* A description of what the element does.
-* Valid values, if the data type doesn't make it obvious.
-* Default value, if any.
-
-For example:
-
-```
-### `pet::cat`
-
-#### Parameters
-
-##### `meow`
-
-Enables vocalization in your cat. Valid options: 'string'.
-
-Default: 'medium-loud'.
+A basic install with the defaults would be:
+```puppet
+include autorestic
 ```
 
-## Limitations
+## Dependencies
 
-In the Limitations section, list any incompatibilities, known issues, or other
-warnings.
+* [stdlib][1]
+* [vcsrepo][2]
+
+[1]:https://forge.puppet.com/puppetlabs/stdlib
+[2]:https://forge.puppet.com/puppetlabs/vcsrepo
 
 ## Development
 
-In the Development section, tell other users the ground rules for contributing
-to your project and how they should submit their work.
-
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel are
-necessary or important to include here. Please use the `##` header.
-
-[1]: https://puppet.com/docs/pdk/latest/pdk_generating_modules.html
-[2]: https://puppet.com/docs/puppet/latest/puppet_strings.html
-[3]: https://puppet.com/docs/puppet/latest/puppet_strings_style.html
+You can submit pull requests and create issues through the official page of this module: https://github.com/rehan/puppet-autorestic.
+Please do report any bug and suggest new features/improvements.
