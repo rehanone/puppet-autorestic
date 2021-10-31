@@ -5,6 +5,7 @@ autorestic::account_name: 'autorestic'
 autorestic::account_gid: '990'
 autorestic::account_uid: '990'
 autorestic::account_home: '/var/lib/autorestic'
+autorestic::account_groups: []
 
 autorestic::dependencies_manage: true
 autorestic::dependencies_packages:
