@@ -6,6 +6,8 @@ class autorestic (
   String[1]             $account_gid,
   String[1]             $account_uid,
   Stdlib::Absolutepath  $account_home,
+  Array[String[1]]      $account_groups,
+
   Boolean               $dependencies_manage,
   Array[String[1]]      $dependencies_packages,
   String[1]             $restic_version,
@@ -16,6 +18,7 @@ class autorestic (
   $restic_checksum_type,
   Stdlib::Absolutepath  $restic_global_install_directory,
   Enum[absent, present] $restic_global_install_ensure,
+
   Enum[absent, present] $autorestic_ensure,
   String[1]             $autorestic_version,
   String[1]             $autorestic_download_filename,
