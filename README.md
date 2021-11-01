@@ -8,19 +8,23 @@
 3. [Setup](#setup)
 4. [Usage](#usage)
     * [Classes](#classes)
-    * [Referances](#referances)
 5. [Dependencies](#dependencies)
 6. [Development](#development)
 
 ## Overview
-The `rehan-autorestic` installs & manages `autorestic` a tool to control/manage various aspects of docker/docker-compose projects on a single host.
+The `rehan-autorestic` installs & manages `autorestic` and `restic`,  tools to back up and restore data to various local and cloud storage solutions. More information can be found on their respective sites.
+
+  - [restic](https://restic.net/)
+  - [autorestic](https://autorestic.vercel.app/)
 
 ## Module Description
-A puppet module for managing the installation of `autorestic`.
 
-More information on `autorestic` tool can be found at:
+This module can create/manage a new user account for backup and restore using `autorestic` for scripting the backup locations and backends.
+It can install system-wide and restricted copies of `restic` binary with file read capability that allows `autorestic` user to back up read all system files without `root` access.
 
-  - [https://github.com/rehanone/autorestic](https://github.com/rehanone/autorestic)
+More information on this can be found at:
+
+  - [Backing up your system without running restic as root](https://restic.readthedocs.io/en/stable/080_examples.html#backing-up-your-system-without-running-restic-as-root)
 
 ## Setup
 In order to install `rehan-autorestic`, run the following command:
@@ -28,9 +32,6 @@ In order to install `rehan-autorestic`, run the following command:
 $ puppet module install rehan-autorestic
 ```
 The module does expect all the data to be provided through 'Hiera'. See [Usage](#usage) for examples on how to configure it.
-
-#### Requirements
-This module is designed to be as clean and compliant with latest puppet code guidelines.
 
 ## Usage
 
@@ -43,13 +44,53 @@ A basic install with the defaults would be:
 include autorestic
 ```
 
+And the default hiera settings are:
+```hiera
+autorestic::account_manage: true
+autorestic::account_ensure: present
+autorestic::account_name: 'autorestic'
+autorestic::account_gid: '990'
+autorestic::account_uid: '990'
+autorestic::account_home: '/var/lib/autorestic'
+autorestic::account_groups: []
+
+autorestic::dependencies_manage: true
+autorestic::dependencies_packages:
+  - bzip2
+
+autorestic::architecture: "%{facts.os.architecture}"
+autorestic::os_type: 'linux'
+
+autorestic::restic_ensure: present
+autorestic::restic_version: '0.12.1'
+autorestic::restic_download_file_extension: "bz2"
+autorestic::restic_download_filename: "restic_%{lookup('autorestic::restic_version')}_%{lookup('autorestic::os_type')}_%{lookup('autorestic::architecture')}"
+autorestic::restic_download_url: "https://github.com/restic/restic/releases/download/v%{lookup('autorestic::restic_version')}/%{lookup('autorestic::restic_download_filename')}.%{lookup('autorestic::restic_download_file_extension')}"
+autorestic::restic_checksum: '11d6ee35ec73058dae73d31d9cd17fe79661090abeb034ec6e13e3c69a4e7088'
+autorestic::restic_checksum_type: sha256
+autorestic::restic_global_install_directory: '/opt/restic'
+autorestic::restic_global_install_ensure: absent
+
+autorestic::autorestic_ensure: present
+autorestic::autorestic_version: '1.4.0'
+autorestic::autorestic_download_file_extension: "bz2"
+autorestic::autorestic_download_filename: "autorestic_%{lookup('autorestic::autorestic_version')}_%{lookup('autorestic::os_type')}_%{lookup('autorestic::architecture')}"
+autorestic::autorestic_download_url: "https://github.com/cupcakearmy/autorestic/releases/download/v%{lookup('autorestic::autorestic_version')}/%{lookup('autorestic::autorestic_download_filename')}.%{lookup('autorestic::autorestic_download_file_extension')}"
+autorestic::autorestic_checksum: 'b92de05eaca58593b80a4b9523fed9ed3cf5a8cdf6d375f05b073ebc3ad15504'
+autorestic::autorestic_checksum_type: sha256
+autorestic::autorestic_install_directory: '/opt/autorestic'
+```
+
+
 ## Dependencies
 
 * [stdlib][1]
-* [vcsrepo][2]
+* [archive][2]
+* [file_capability][3]
 
-[1]:https://forge.puppet.com/puppetlabs/stdlib
-[2]:https://forge.puppet.com/puppetlabs/vcsrepo
+[1]:https://forge.puppet.com/modules/puppetlabs/stdlib
+[2]:https://forge.puppet.com/modules/puppet/archive
+[3]:https://forge.puppet.com/modules/stm/file_capability
 
 ## Development
 

@@ -2,7 +2,7 @@
   "name": "rehan-autorestic",
   "version": "0.0.1",
   "author": "Rehan Mahmood",
-  "summary": "Install, manage and configure docker/docker-compose management tool autorestic from Github",
+  "summary": "Install, manage and configure backup tool restic and autorestic from Github releases",
   "license": "Apache-2.0",
   "source": "https://github.com/rehanone/puppet-autorestic.git",
   "project_page": "https://github.com/rehanone/puppet-autorestic",
@@ -48,10 +48,10 @@
     }
   ],
   "tags": [
-    "docker",
-    "docker-compose",
-    "compose",
-    "container management"
+    "restic",
+    "autorestic",
+    "backup",
+    "restore"
   ],
   "pdk-version": "2.2.0",
   "template-url": "pdk-default#2.2.0",
