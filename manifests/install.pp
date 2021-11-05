@@ -70,22 +70,4 @@ class autorestic::install () inherits autorestic {
       },
     }
   )
-
-  file { "${autorestic::autorestic_install_directory}/arctl":
-    ensure  => $file_ensure,
-    path    => "${autorestic::autorestic_install_directory}/arctl",
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    content => epp("${module_name}/arctl.epp",
-      {
-        'account_name'      => $autorestic::account_name,
-        'account_home'      => $autorestic::account_home,
-        'install_directory' => '/usr/local/bin',
-      }
-    ),
-  } -> file { '/usr/local/bin/arctl':
-    ensure => $link_ensure,
-    target => "${autorestic::autorestic_install_directory}/arctl",
-  }
 }

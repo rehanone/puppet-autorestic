@@ -25,10 +25,12 @@ autorestic::restic_global_install_directory: '/opt/restic'
 autorestic::restic_global_install_ensure: absent
 
 autorestic::autorestic_ensure: present
-autorestic::autorestic_version: '1.4.0'
+autorestic::autorestic_version: '1.4.1'
 autorestic::autorestic_download_file_extension: "bz2"
 autorestic::autorestic_download_filename: "autorestic_%{lookup('autorestic::autorestic_version')}_%{lookup('autorestic::os_type')}_%{lookup('autorestic::architecture')}"
 autorestic::autorestic_download_url: "https://github.com/cupcakearmy/autorestic/releases/download/v%{lookup('autorestic::autorestic_version')}/%{lookup('autorestic::autorestic_download_filename')}.%{lookup('autorestic::autorestic_download_file_extension')}"
-autorestic::autorestic_checksum: 'b92de05eaca58593b80a4b9523fed9ed3cf5a8cdf6d375f05b073ebc3ad15504'
+autorestic::autorestic_checksum: 'e995abe2ba96af7fd63423ad777ac6292999da2ed3d25d757d022ee4e1a956d1'
 autorestic::autorestic_checksum_type: sha256
 autorestic::autorestic_install_directory: '/opt/autorestic'
+
+autorestic::wrapper_user: "%{lookup('autorestic::account_name')}"
