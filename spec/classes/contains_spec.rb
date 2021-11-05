@@ -14,10 +14,12 @@ describe 'autorestic' do
         it { is_expected.to contain_class('autorestic::dependencies') }
         it { is_expected.to contain_class('autorestic::config') }
         it { is_expected.to contain_class('autorestic::install') }
+        it { is_expected.to contain_class('autorestic::wrapper') }
 
         it { is_expected.to contain_class('autorestic::account').that_comes_before('Class[autorestic::dependencies]') }
         it { is_expected.to contain_class('autorestic::dependencies').that_comes_before('Class[autorestic::config]') }
         it { is_expected.to contain_class('autorestic::config').that_comes_before('Class[autorestic::install]') }
+        it { is_expected.to contain_class('autorestic::install').that_comes_before('Class[autorestic::wrapper]') }
       end
     end
   end

@@ -27,6 +27,7 @@ class autorestic (
   Enum[none, md5, sha1, sha2, sha256, sha384, sha512]
   $autorestic_checksum_type,
   Stdlib::Absolutepath  $autorestic_install_directory,
+  String[1]             $wrapper_user,
   Optional[String[1]]   $autorestic_config_source = undef,
 ) {
 
@@ -35,5 +36,6 @@ class autorestic (
   -> class { "${module_name}::dependencies": }
   -> class { "${module_name}::config": }
   -> class { "${module_name}::install": }
+  -> class { "${module_name}::wrapper": }
   -> anchor { "${module_name}::end": }
 }
