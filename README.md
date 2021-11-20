@@ -1,6 +1,6 @@
 # rehan-autorestic
 
-[![Build Status](https://travis-ci.com/rehanone/puppet-autorestic.svg?branch=master)](https://travis-ci.com/rehanone/puppet-autorestic)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/rehan/autorestic.svg)](https://forge.puppetlabs.com/rehan/autorestic) [![Build Status](https://travis-ci.com/rehanone/puppet-autorestic.svg?branch=master)](https://travis-ci.com/rehanone/puppet-autorestic)
 
 #### Table of Contents
 1. [Overview](#overview)
@@ -45,7 +45,7 @@ include autorestic
 ```
 
 And the default hiera settings are:
-```hiera
+```yaml
 autorestic::account_manage: true
 autorestic::account_ensure: present
 autorestic::account_name: 'autorestic'
@@ -56,7 +56,7 @@ autorestic::account_groups: []
 
 autorestic::dependencies_manage: true
 autorestic::dependencies_packages:
-  - bzip2
+   - bzip2
 
 autorestic::architecture: "%{facts.os.architecture}"
 autorestic::os_type: 'linux'
@@ -72,13 +72,15 @@ autorestic::restic_global_install_directory: '/opt/restic'
 autorestic::restic_global_install_ensure: absent
 
 autorestic::autorestic_ensure: present
-autorestic::autorestic_version: '1.4.0'
+autorestic::autorestic_version: '1.5.0'
 autorestic::autorestic_download_file_extension: "bz2"
 autorestic::autorestic_download_filename: "autorestic_%{lookup('autorestic::autorestic_version')}_%{lookup('autorestic::os_type')}_%{lookup('autorestic::architecture')}"
 autorestic::autorestic_download_url: "https://github.com/cupcakearmy/autorestic/releases/download/v%{lookup('autorestic::autorestic_version')}/%{lookup('autorestic::autorestic_download_filename')}.%{lookup('autorestic::autorestic_download_file_extension')}"
-autorestic::autorestic_checksum: 'b92de05eaca58593b80a4b9523fed9ed3cf5a8cdf6d375f05b073ebc3ad15504'
+autorestic::autorestic_checksum: '823c4b766f289d5d1a40fea52a6f4f1fbd4071ca6e57c74b88e57e0649cbaeaf'
 autorestic::autorestic_checksum_type: sha256
 autorestic::autorestic_install_directory: '/opt/autorestic'
+
+autorestic::wrapper_user: "%{lookup('autorestic::account_name')}"
 ```
 
 
