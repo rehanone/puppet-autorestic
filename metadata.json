@@ -1,6 +1,6 @@
 {
   "name": "rehan-autorestic",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "author": "Rehan Mahmood",
   "summary": "Install, manage and configure backup tool restic and autorestic from Github releases",
   "license": "Apache-2.0",
