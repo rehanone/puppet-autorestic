@@ -1,3 +1,11 @@
+## 1.0.1 (March 29, 2022)
+
+**Features:**
+
+- Update autorestic to version `1.5.8`
+- Update restic to version `0.13.0`
+- Updated `pdk` templates.
+
 ## 1.0.0 (November 20, 2021)
 
 **Features:**
