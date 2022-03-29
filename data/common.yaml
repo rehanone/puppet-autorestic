@@ -15,21 +15,21 @@ autorestic::architecture: "%{facts.os.architecture}"
 autorestic::os_type: 'linux'
 
 autorestic::restic_ensure: present
-autorestic::restic_version: '0.12.1'
+autorestic::restic_version: '0.13.0'
 autorestic::restic_download_file_extension: "bz2"
 autorestic::restic_download_filename: "restic_%{lookup('autorestic::restic_version')}_%{lookup('autorestic::os_type')}_%{lookup('autorestic::architecture')}"
 autorestic::restic_download_url: "https://github.com/restic/restic/releases/download/v%{lookup('autorestic::restic_version')}/%{lookup('autorestic::restic_download_filename')}.%{lookup('autorestic::restic_download_file_extension')}"
-autorestic::restic_checksum: '11d6ee35ec73058dae73d31d9cd17fe79661090abeb034ec6e13e3c69a4e7088'
+autorestic::restic_checksum: '514d0711317427f45d3ca23e66cf66e9f98caef660314d843f59b38511e94a2c'
 autorestic::restic_checksum_type: sha256
 autorestic::restic_global_install_directory: '/opt/restic'
 autorestic::restic_global_install_ensure: absent
 
 autorestic::autorestic_ensure: present
-autorestic::autorestic_version: '1.5.0'
+autorestic::autorestic_version: '1.5.8'
 autorestic::autorestic_download_file_extension: "bz2"
 autorestic::autorestic_download_filename: "autorestic_%{lookup('autorestic::autorestic_version')}_%{lookup('autorestic::os_type')}_%{lookup('autorestic::architecture')}"
 autorestic::autorestic_download_url: "https://github.com/cupcakearmy/autorestic/releases/download/v%{lookup('autorestic::autorestic_version')}/%{lookup('autorestic::autorestic_download_filename')}.%{lookup('autorestic::autorestic_download_file_extension')}"
-autorestic::autorestic_checksum: '823c4b766f289d5d1a40fea52a6f4f1fbd4071ca6e57c74b88e57e0649cbaeaf'
+autorestic::autorestic_checksum: '38b679de469a559ab5e932d86007d6f9d0e50b412a25d4af961ad9a880791777'
 autorestic::autorestic_checksum_type: sha256
 autorestic::autorestic_install_directory: '/opt/autorestic'
 
