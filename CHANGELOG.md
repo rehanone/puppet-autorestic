@@ -1,3 +1,10 @@
+## 1.0.2 (July 17, 2022)
+
+**Improvements:**
+
+- Fix for a breaking change in `puppet-stdlib` version 8.3.0 (https://github.com/puppetlabs/puppetlabs-stdlib/pull/1196)
+- Removed test coverage for Ubuntu 14.04.
+
 ## 1.0.1 (March 29, 2022)
 
 **Features:**
