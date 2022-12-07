@@ -1,5 +1,4 @@
 class autorestic::config () inherits autorestic {
-
   assert_private("Use of private class ${name} by ${caller_module_name}")
 
   $file_ensure = $autorestic::autorestic_ensure ? {

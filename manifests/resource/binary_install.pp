@@ -12,7 +12,6 @@ define autorestic::resource::binary_install (
   String[1]             $group,
   Stdlib::Absolutepath  $soft_link,
 ) {
-
   $file_ensure = $ensure ? {
     'present' => file,
     default   => $ensure,
@@ -31,6 +30,8 @@ define autorestic::resource::binary_install (
   if $create_install_directory {
     file { $install_directory:
       ensure => $directory_ensure,
+      purge   => true,
+      recurse => true,
     }
   }
 

@@ -30,7 +30,6 @@ class autorestic (
   String[1]             $wrapper_user,
   Optional[String[1]]   $autorestic_config_source = undef,
 ) {
-
   anchor { "${module_name}::begin": }
   -> class { "${module_name}::account": }
   -> class { "${module_name}::dependencies": }
