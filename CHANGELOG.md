@@ -1,3 +1,13 @@
+## 1.0.3 (December 7, 2022)
+
+**Improvements:**
+
+- Updated autorestic version.
+- Updated restic version.
+- Update os support matrix.
+- Update `pdk`.
+- Manage install directory for binaries of `restic` and `autorestic`.
+
 ## 1.0.2 (July 17, 2022)
 
 **Improvements:**
