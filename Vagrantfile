@@ -3,13 +3,13 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "bento/ubuntu-20.04"
-  config.vm.box_url = "https://app.vagrantup.com/bento/boxes/ubuntu-20.04"
+  config.vm.box = "bento/ubuntu-22.04"
+  config.vm.box_url = "https://app.vagrantup.com/bento/boxes/ubuntu-22.04"
 
   config.vm.synced_folder ".", "/etc/puppetlabs/code/environments/production/modules/autorestic"
 
   config.vm.provision :shell, inline: <<-EOF
-    readonly source_file="puppet7-release-focal.deb"
+    readonly source_file="puppet7-release-jammy.deb"
     readonly source_url="https://apt.puppetlabs.com/"
 
     if [ -f ${source_file} ]; then

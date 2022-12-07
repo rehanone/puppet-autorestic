@@ -1,5 +1,4 @@
 class autorestic::account () inherits autorestic {
-
   assert_private("Use of private class ${name} by ${caller_module_name}")
 
   $directory_ensure = $autorestic::account_ensure ? {
